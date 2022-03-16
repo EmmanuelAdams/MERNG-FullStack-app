@@ -12,10 +12,10 @@ function Register(props) {
     confirmPassword: '',
   });
 
-  const onChange = (event) => {
+  const onChange = (e) => {
     setValues({
       ...values,
-      [event.target.name]: event.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -27,16 +27,15 @@ function Register(props) {
         props.history.push('/');
       },
       onError(err) {
-        setErrors(
-          err.graphQLErrors[0].extensions.exception.errors
-        );
+        console.log(err.graphQLErrors);
+        setErrors(err.graphQLErrors[0].extensions.errors);
       },
       variables: values,
     }
   );
 
-  const onSubmit = (event) => {
-    event.preventDefault();
+  const onSubmit = (e) => {
+    e.preventDefault();
     addUser();
   };
 
