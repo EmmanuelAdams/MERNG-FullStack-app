@@ -2,42 +2,42 @@ import gql from 'graphql-tag';
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Button, Form } from 'semantic-ui-react';
+import { useNavigate } from 'react-router-dom';
 
-function Register(props) {
+import { useForm } from '../util/hooks';
+
+function Register() {
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
-  const [values, setValues] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
 
-  const onChange = (e) => {
-    setValues({
-      ...values,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const { onChange, onSubmit, values } = useForm(
+    registerUser,
+    {
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    }
+  );
 
   const [addUser, { loading }] = useMutation(
     REGISTER_USER,
     {
       update(_, result) {
         console.log(result);
-        props.history.push('/');
+        navigate('/');
       },
       onError(err) {
-        console.log(err.graphQLErrors);
+        // console.log(err.graphQLErrors);
         setErrors(err.graphQLErrors[0].extensions.errors);
       },
       variables: values,
     }
   );
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  function registerUser() {
     addUser();
-  };
+  }
 
   return (
     <div className="form-container">
