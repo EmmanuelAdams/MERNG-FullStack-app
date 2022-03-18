@@ -22,7 +22,7 @@ module.exports.validateRegisterInput = (
   } else if (password !== confirmPassword) {
     errors.confirmPassword = 'Passwords must match';
   }
-  console.log('valid => ', errors);
+
   return {
     errors,
     valid: Object.keys(errors).length < 1,
