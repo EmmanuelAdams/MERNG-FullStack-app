@@ -16,19 +16,17 @@ module.exports.validateRegisterInput = (
     if (!email.match(regEx)) {
       errors.email = 'Email must be a valid email address';
     }
-    {
-      if (password === '') {
-        errors.password = 'Password must not be empty';
-      } else if (password !== confirmPassword) {
-        errors.confirmPassword = 'Passwords must match';
-      }
-    }
-
-    return {
-      errors,
-      valid: Object.keys(errors).length < 1,
-    };
   }
+  if (password === '') {
+    errors.password = 'Password must not be empty';
+  } else if (password !== confirmPassword) {
+    errors.confirmPassword = 'Passwords must match';
+  }
+  console.log('valid => ', errors);
+  return {
+    errors,
+    valid: Object.keys(errors).length < 1,
+  };
 };
 
 module.exports.validateLoginInput = (
