@@ -18,7 +18,7 @@ if (localStorage.getItem('jwtToken')) {
 }
 
 const AuthContext = createContext({
-  user: null,
+  user: localStorage.getItem('jwtToken') || null,
   login: (userData) => {},
   logout: () => {},
 });
@@ -60,6 +60,7 @@ function AuthProvider(props) {
     dispatch({
       type: 'LOGOUT',
     });
+    window.location.reload();
   }
 
   return (
