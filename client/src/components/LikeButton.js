@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
 import { Button, Label, Icon } from 'semantic-ui-react';
+import MyPopup from '../util/MyPopup';
 
 function LikeButton({
   user,
@@ -41,15 +42,17 @@ function LikeButton({
   );
 
   return (
-    <Button
-      as="div"
-      labelPosition="right"
-      onClick={likePost}>
-      {likeButton}
-      <Label basic color="teal" pointing="left">
-        {likeCount}
-      </Label>
-    </Button>
+    <MyPopup content={liked ? 'Unlike' : 'Like'}>
+      <Button
+        as="div"
+        labelPosition="right"
+        onClick={likePost}>
+        {likeButton}
+        <Label basic color="teal" pointing="left">
+          {likeCount}
+        </Label>
+      </Button>
+    </MyPopup>
   );
 }
 
