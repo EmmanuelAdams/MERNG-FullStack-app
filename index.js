@@ -1,8 +1,6 @@
-const express = require('express');
 const { PubSub } = require('graphql-subscriptions');
 const { ApolloServer } = require('apollo-server');
 const mongoose = require('mongoose');
-const morgan = require('morgan');
 
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
@@ -17,25 +15,6 @@ const server = new ApolloServer({
   resolvers,
   context: ({ req }) => ({ req, pubsub }),
 });
-
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-}
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-
-  app.get('*', (req, res) =>
-    res.sendFile(
-      path.resolve(
-        __dirname,
-        'client',
-        'build',
-        'index.html'
-      )
-    )
-  );
-}
 
 mongoose
   .connect(MONGODB, { useNewUrlParser: true })
