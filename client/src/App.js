@@ -16,6 +16,7 @@ import MenuBar from './components/MenuBar';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import SinglePost from './pages/SinglePost';
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -50,6 +51,10 @@ function App() {
               path="*"
               element={<Navigate to="/" replace />}
             />
+            <Route
+              exact
+              path="/posts/:postId"
+              element={<SinglePost />}></Route>
           </Routes>
         </Container>
       </Router>
