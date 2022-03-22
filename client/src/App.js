@@ -30,10 +30,6 @@ function App() {
             <Route
               exact
               path="/"
-              element={<Home />}></Route>
-            <Route
-              exact
-              path="/"
               element={
                 user ? <Home /> : <Register />
               }></Route>
@@ -48,13 +44,14 @@ function App() {
                 user ? <Navigate to="/" /> : <Register />
               }></Route>
             <Route
-              path="*"
-              element={<Navigate to="/" replace />}
-            />
-            <Route
               exact
               path="/posts/:postId"
               element={<SinglePost />}></Route>
+
+            <Route
+              path="*"
+              element={<Navigate to="/" replace />}
+            />
           </Routes>
         </Container>
       </Router>

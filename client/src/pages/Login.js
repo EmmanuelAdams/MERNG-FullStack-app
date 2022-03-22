@@ -24,6 +24,7 @@ function Login() {
     update(_, { data: { login: userData } }) {
       context.login(userData);
       navigate('/');
+      window.location.reload(true);
     },
     onError(err) {
       setErrors(err.graphQLErrors[0].extensions.errors);
