@@ -53,5 +53,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "proxy": "http://localhost:5000"
+  "proxy": "https://fierce-wave-41680.herokuapp.com/"
 }
